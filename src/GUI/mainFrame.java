@@ -32,19 +32,7 @@ public class mainFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-
-// RANDOM SHIT
-//        // just for testing
-//        DefaultTableModel defaultTableModel = new DefaultTableModel();
-//        defaultTableModel.addColumn("Index");
-//        defaultTableModel.addColumn("Data");
-//        String data[][] = new String[256][2];
-//        for (int i = 0; i < 256; i++) {
-//            memory[i] = (15 << 4);
-//            defaultTableModel.addRow(new String[]{Integer.toString(i + 1), Integer.toString(memory[i])});
-//        }
-//        memoryTable.setModel(defaultTableModel);
-//        // end of testing
+// RANDOM SHIT REMOVED !!!
     }
 
 
