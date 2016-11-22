@@ -1,9 +1,9 @@
-package Core.Model;
+package core.model;
 
-/**
+/*
  * Created by Ahmed on 10/26/2016.
  */
-public class CPU {
+public class CPU_Model {
 
     private static final int MOVE = 0;
     private static final int ADD = 1;
@@ -15,14 +15,14 @@ public class CPU {
     private static final int EXG = 7;// Exg change the value of two registers
     private static final int STOP = 15;
 
-    private static int PC = 0;                  // Program Counter
-    private static int D0 = 0;                  // Data Reg
-    private static int A0 = 0;                  // Address Reg
-    private static int CCR = 0;                 // Condition Code Register (Flags)
-    private static int MAR;                     // Memory Address Register
-    private static int MBR;                     // Memory buffer register
-    private static int IR;                      // Instruction Register
-    private static int operand;                 // The 8-bit operand from IR
+    private static int pc = 0;                  // Program Counter
+    private static int d0 = 0;                  // Data Reg
+    private static int a0 = 0;                  // Address Reg
+    private static int ccr = 0;                 // Condition Code Register (Flags)
+    private static int mar;                     // Memory Address Register
+    private static int mbr;                     // Memory buffer register
+    private static int ir;                      // Instruction Register
+    private static int operand;                 // The 8-bit operand from ir
     private static int source;                  // source operand
     private static int destination;             // the destination value
     private static int opcode;                  // the 4-bit opCode
@@ -30,8 +30,6 @@ public class CPU {
     private static int direction;               // the 1-bit direction flag
     private static int[] memory = new int[256]; // the memory
     private static int run = 1;
-
-
 
 
     /*
@@ -58,22 +56,22 @@ public class CPU {
 
     private void fetchInstruction() {
         //Get Op-Code
-        MAR = PC;
-        PC++;
-        MBR = memory[MAR];
-        IR = MBR;
-        opcode = IR;
+        mar = pc;
+        pc++;
+        mbr = memory[mar];
+        ir = mbr;
+        opcode = ir;
         // Handle Bits
         addressingMode = opcode & 0x03;
         direction = (opcode & 0x04) >> 2;
         opcode = opcode >> 4;
 
         //Get Operand
-        MAR = PC;
-        PC++;
-        MBR = memory[MAR];
-        IR = MBR;
-        operand = IR;
+        mar = pc;
+        pc++;
+        mbr = memory[mar];
+        ir = mbr;
+        operand = ir;
     }
 
     private void getSourceOperand() {
@@ -85,10 +83,10 @@ public class CPU {
                 source = operand;
                 break;
             case 2:
-                source = memory[A0 + operand];
+                source = memory[a0 + operand];
                 break;
             case 3:
-                source = memory[PC + operand];
+                source = memory[pc + operand];
                 break;
             default:
                 break;
@@ -99,68 +97,68 @@ public class CPU {
         switch (opcode) {
             case MOVE: {
                 if (direction == 0)
-                    destination = D0;
+                    destination = d0;
                 else
-                    D0 = source;
-                if (D0 == 0)
-                    CCR = 1;
+                    d0 = source;
+                if (d0 == 0)
+                    ccr = 1;
                 else
-                    CCR = 0;
+                    ccr = 0;
                 break;
             }
             case ADD: {
                 if (direction == 0) {
-                    destination = D0 + source;
-                    if (destination == 0) CCR = 1;
-                    else CCR = 0;
+                    destination = d0 + source;
+                    if (destination == 0) ccr = 1;
+                    else ccr = 0;
                 } else {
-                    D0 = D0 + source;
-                    if (D0 == 0) CCR = 1;
-                    else CCR = 0;
+                    d0 = d0 + source;
+                    if (d0 == 0) ccr = 1;
+                    else ccr = 0;
                 }
                 break;
             }
             case SUB: {
                 if (direction == 0) {
-                    destination = D0 - source;
-                    if (destination == 0) CCR = 1;
-                    else CCR = 0;
+                    destination = d0 - source;
+                    if (destination == 0) ccr = 1;
+                    else ccr = 0;
                 } else {
-                    D0 = D0 - source;
-                    if (D0 == 0) CCR = 1;
-                    else CCR = 0;
+                    d0 = d0 - source;
+                    if (d0 == 0) ccr = 1;
+                    else ccr = 0;
                 }
                 break;
             }
             case BRA: {
-                if (addressingMode == 0) PC = operand;
-                if (addressingMode == 1) PC = PC + operand;
+                if (addressingMode == 0) pc = operand;
+                if (addressingMode == 1) pc = pc + operand;
                 break;
             }
             case CMP: {
-                MBR = D0 - source;
-                if (MBR == 0) CCR = 1;
-                else CCR = 0;
+                mbr = d0 - source;
+                if (mbr == 0) ccr = 1;
+                else ccr = 0;
                 break;
             }
             case BEQ: {
-                if (CCR == 1) {
-                    if (addressingMode == 0) PC = operand;
-                    if (addressingMode == 1) PC = PC + operand;
+                if (ccr == 1) {
+                    if (addressingMode == 0) pc = operand;
+                    if (addressingMode == 1) pc = pc + operand;
                 }
                 break;
             }
             case BNE: {
-                if (CCR != 1) {
-                    if (addressingMode == 0) PC = operand;
-                    if (addressingMode == 1) PC = PC + operand;
+                if (ccr != 1) {
+                    if (addressingMode == 0) pc = operand;
+                    if (addressingMode == 1) pc = pc + operand;
                 }
                 break;
             }
             case EXG: {
-                MBR = D0;
-                D0 = A0;
-                A0 = MBR;
+                mbr = d0;
+                d0 = a0;
+                a0 = mbr;
                 break;
             }
             case STOP: {
@@ -179,10 +177,10 @@ public class CPU {
                 case 1: //Literal
                     break;
                 case 2: //Indexed
-                    memory[A0 + operand] = destination;
+                    memory[a0 + operand] = destination;
                     break;
                 case 3: //Relative
-                    memory[PC + operand] = destination;
+                    memory[pc + operand] = destination;
                     break;
             }
         }
