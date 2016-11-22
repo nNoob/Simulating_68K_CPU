@@ -28,7 +28,7 @@ public class CPU {
     private static int opcode;                  // the 4-bit opCode
     private static int addressingMode;          // the 2-bit addressing mode
     private static int direction;               // the 1-bit direction flag
-    public static int[] memory = new int[256]; // the memory
+    private static int[] memory = new int[256]; // the memory
     private static int run = 1;
 
     /*
