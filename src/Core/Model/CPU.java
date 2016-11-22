@@ -44,7 +44,6 @@ public class CPU {
      * Bit 3        not used
      * Bit 7 to 4   4-bit instruction code
      */
-
     void runProgram() {
         while (run == 1) {
             fetchInstruction();
