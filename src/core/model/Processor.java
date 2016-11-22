@@ -1,13 +1,11 @@
 package core.model;
 
+import java.util.ArrayList;
+
 /*
  * Created by abdelrahman on 11/22/16.
  */
 public interface Processor {
-    /**
-     * sets the initial values of registers, memory, PC, IR to zero
-     */
-    void initialize();
 
     /**
      * loads a program as an array of integers each integer representing
@@ -29,4 +27,16 @@ public interface Processor {
      * fetch cycle
      */
     void execute();
+
+    /**
+     * returns the current data inside the CPU registers
+     * in a CPUData object
+     */
+    CPUData getData();
+
+    /**
+     * returns the an ArrayList of integers representing a current
+     * snapshot of the memory
+     */
+     ArrayList<Integer> getMemory();
 }
