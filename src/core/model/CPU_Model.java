@@ -15,21 +15,22 @@ public class CPU_Model {
     private static final int EXG = 7;// Exg change the value of two registers
     private static final int STOP = 15;
 
-    private static int pc = 0;                  // Program Counter
-    private static int d0 = 0;                  // Data Reg
-    private static int a0 = 0;                  // Address Reg
-    private static int ccr = 0;                 // Condition Code Register (Flags)
-    private static int mar;                     // Memory Address Register
-    private static int mbr;                     // Memory buffer register
-    private static int ir;                      // Instruction Register
-    private static int operand;                 // The 8-bit operand from ir
-    private static int source;                  // source operand
-    private static int destination;             // the destination value
-    private static int opcode;                  // the 4-bit opCode
-    private static int addressingMode;          // the 2-bit addressing mode
-    private static int direction;               // the 1-bit direction flag
-    private static int[] memory = new int[256]; // the memory
-    private static int run = 1;
+
+    static int pc = 0;                  // Program Counter
+    static int d0 = 0;                  // Data Reg
+    static int a0 = 0;                  // Address Reg
+    static int ccr = 0;                 // Condition Code Register (Flags)
+    static int mar;                     // Memory Address Register
+    static int mbr;                     // Memory buffer register
+    static int ir;                      // Instruction Register
+    static int operand;                 // The 8-bit operand from ir
+    static int source;                  // source operand
+    static int destination;             // the destination value
+    static int opcode;                  // the 4-bit opCode
+    static int addressingMode;          // the 2-bit addressing mode
+    static int direction;               // the 1-bit direction flag
+    static int[] memory = new int[256]; // the memory
+    static int run = 1;
 
 
     /*
@@ -45,144 +46,116 @@ public class CPU_Model {
      * Bit 3        not used
      * Bit 7 to 4   4-bit instruction code
      */
-    void runProgram() {
-        while (run == 1) {
-            fetchInstruction();
-            getSourceOperand();
-            executeInstruction();
-            saveInMemory();
-        }
+
+    public static int getPc() {
+        return pc;
     }
 
-    private void fetchInstruction() {
-        //Get Op-Code
-        mar = pc;
-        pc++;
-        mbr = memory[mar];
-        ir = mbr;
-        opcode = ir;
-        // Handle Bits
-        addressingMode = opcode & 0x03;
-        direction = (opcode & 0x04) >> 2;
-        opcode = opcode >> 4;
-
-        //Get Operand
-        mar = pc;
-        pc++;
-        mbr = memory[mar];
-        ir = mbr;
-        operand = ir;
+    public static void setPc(int pc) {
+        CPU_Model.pc = pc;
     }
 
-    private void getSourceOperand() {
-        switch (addressingMode) {
-            case 0:
-                source = memory[operand];
-                break;
-            case 1:
-                source = operand;
-                break;
-            case 2:
-                source = memory[a0 + operand];
-                break;
-            case 3:
-                source = memory[pc + operand];
-                break;
-            default:
-                break;
-        }
+    public static int getD0() {
+        return d0;
     }
 
-    private void executeInstruction() {
-        switch (opcode) {
-            case MOVE: {
-                if (direction == 0)
-                    destination = d0;
-                else
-                    d0 = source;
-                if (d0 == 0)
-                    ccr = 1;
-                else
-                    ccr = 0;
-                break;
-            }
-            case ADD: {
-                if (direction == 0) {
-                    destination = d0 + source;
-                    if (destination == 0) ccr = 1;
-                    else ccr = 0;
-                } else {
-                    d0 = d0 + source;
-                    if (d0 == 0) ccr = 1;
-                    else ccr = 0;
-                }
-                break;
-            }
-            case SUB: {
-                if (direction == 0) {
-                    destination = d0 - source;
-                    if (destination == 0) ccr = 1;
-                    else ccr = 0;
-                } else {
-                    d0 = d0 - source;
-                    if (d0 == 0) ccr = 1;
-                    else ccr = 0;
-                }
-                break;
-            }
-            case BRA: {
-                if (addressingMode == 0) pc = operand;
-                if (addressingMode == 1) pc = pc + operand;
-                break;
-            }
-            case CMP: {
-                mbr = d0 - source;
-                if (mbr == 0) ccr = 1;
-                else ccr = 0;
-                break;
-            }
-            case BEQ: {
-                if (ccr == 1) {
-                    if (addressingMode == 0) pc = operand;
-                    if (addressingMode == 1) pc = pc + operand;
-                }
-                break;
-            }
-            case BNE: {
-                if (ccr != 1) {
-                    if (addressingMode == 0) pc = operand;
-                    if (addressingMode == 1) pc = pc + operand;
-                }
-                break;
-            }
-            case EXG: {
-                mbr = d0;
-                d0 = a0;
-                a0 = mbr;
-                break;
-            }
-            case STOP: {
-                run = 0;
-                break;
-            }
-        }
+    public static void setD0(int d0) {
+        CPU_Model.d0 = d0;
     }
 
-    private void saveInMemory() {
-        if (direction == 0) {
-            switch (addressingMode) {
-                case 0: //Absolute
-                    memory[operand] = destination;
-                    break;
-                case 1: //Literal
-                    break;
-                case 2: //Indexed
-                    memory[a0 + operand] = destination;
-                    break;
-                case 3: //Relative
-                    memory[pc + operand] = destination;
-                    break;
-            }
-        }
+    public static int getA0() {
+        return a0;
+    }
+
+    public static void setA0(int a0) {
+        CPU_Model.a0 = a0;
+    }
+
+    public static int getCcr() {
+        return ccr;
+    }
+
+    public static void setCcr(int ccr) {
+        CPU_Model.ccr = ccr;
+    }
+
+    public static int getMar() {
+        return mar;
+    }
+
+    public static void setMar(int mar) {
+        CPU_Model.mar = mar;
+    }
+
+    public static int getMbr() {
+        return mbr;
+    }
+
+    public static void setMbr(int mbr) {
+        CPU_Model.mbr = mbr;
+    }
+
+    public static int getIr() {
+        return ir;
+    }
+
+    public static void setIr(int ir) {
+        CPU_Model.ir = ir;
+    }
+
+    public static int getOperand() {
+        return operand;
+    }
+
+    public static void setOperand(int operand) {
+        CPU_Model.operand = operand;
+    }
+
+    public static int getSource() {
+        return source;
+    }
+
+    public static void setSource(int source) {
+        CPU_Model.source = source;
+    }
+
+    public static int getDestination() {
+        return destination;
+    }
+
+    public static void setDestination(int destination) {
+        CPU_Model.destination = destination;
+    }
+
+    public static int getOpcode() {
+        return opcode;
+    }
+
+    public static void setOpcode(int opcode) {
+        CPU_Model.opcode = opcode;
+    }
+
+    public static int getAddressingMode() {
+        return addressingMode;
+    }
+
+    public static void setAddressingMode(int addressingMode) {
+        CPU_Model.addressingMode = addressingMode;
+    }
+
+    public static int getDirection() {
+        return direction;
+    }
+
+    public static void setDirection(int direction) {
+        CPU_Model.direction = direction;
+    }
+
+    public static int[] getMemory() {
+        return memory;
+    }
+
+    public static void setMemory(int[] memory) {
+        CPU_Model.memory = memory;
     }
 }
