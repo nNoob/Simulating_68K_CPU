@@ -17,9 +17,11 @@ public interface Processor {
     void loadProgram(int[] code, int startingAddress);
 
     /**
-     * fetch the instruction pointed to by PC in memory
+     * fetches the instruction pointed to by PC in memory
+     * @returns a binary string of bits that is the instruction fetched
+     * comprising the opcode and the operand
      */
-    void fetch();
+    String fetch();
 
     /**
      * executes the instruction currently in the IR register
