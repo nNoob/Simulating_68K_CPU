@@ -13,6 +13,7 @@ public class DataBinding {
     private String operand;
 
     public DataBinding() {
+
     }
 
     public String getPC() {
