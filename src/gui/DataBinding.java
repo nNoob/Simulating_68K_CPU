@@ -1,6 +1,6 @@
 package gui;
 
-public class dataBinding {
+public class DataBinding {
     private String pc;
     private String mar;
     private String d0;
@@ -12,7 +12,7 @@ public class dataBinding {
     private String source;
     private String operand;
 
-    public dataBinding() {
+    public DataBinding() {
     }
 
     public String getPC() {

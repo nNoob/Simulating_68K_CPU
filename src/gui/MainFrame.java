@@ -41,7 +41,7 @@ public class MainFrame {
     }
 
     // set data to gui
-    public void setData(dataBinding data) {
+    public void setData(DataBinding data) {
         PCtextField.setText(data.getPC());
         MARtextField.setText(data.getMAR());
         aModeTextField.setText(data.getAddressingMode());
@@ -53,7 +53,7 @@ public class MainFrame {
     }
 
     // get data from gui
-    public void getData(dataBinding data) {
+    public void getData(DataBinding data) {
         data.setPC(PCtextField.getText());
         data.setMAR(MARtextField.getText());
         data.setAddressingMode(aModeTextField.getText());
@@ -66,7 +66,7 @@ public class MainFrame {
 
 
     // observe modifications
-    public boolean isModified(dataBinding data) {
+    public boolean isModified(DataBinding data) {
         if (PCtextField.getText() != null ? !PCtextField.getText().equals(data.getPC()) : data.getPC() != null)
             return true;
         if (MARtextField.getText() != null ? !MARtextField.getText().equals(data.getMAR()) : data.getMAR() != null)
