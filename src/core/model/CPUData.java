@@ -3,7 +3,7 @@ package core.model;
 /*
  * Created by Ahmed on 10/26/2016.
  */
-public class CPUData {
+public class CPUData implements Cloneable{
 
     public int PC = 0;                  // Program Counter
     public int D0 = 0;                  // Data Reg
@@ -27,6 +27,29 @@ public class CPUData {
         this.MBR = MBR;
         this.IR = IR;
         this.memory = memory;
+    }
+
+    /* Copy Constructor */
+    public CPUData(CPUData another){
+        this.PC = another.PC;
+        this.D0 = another.D0;
+        this.A0 = another.A0;
+        this.CCR = another.CCR;
+        this.MAR = another.MAR;
+        this.MBR = another.MBR;
+        this.IR = another.IR;
+        this.memory = another.memory;
+    }
+
+    public void resetData() {
+        this.PC = 0;
+        this.D0 = 0;
+        this.A0 = 0;
+        this.CCR = 0;
+        this.MAR = 0;
+        this.MBR = 0;
+        this.IR = 0;
+        this.memory = new int[256];
     }
 
 }

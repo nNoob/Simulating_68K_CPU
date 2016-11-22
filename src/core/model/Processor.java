@@ -29,14 +29,14 @@ public interface Processor {
     void execute();
 
     /**
-     * returns the current data inside the CPU registers
+     * returns the current data inside the CPU registers and memory
      * in a CPUData object
      */
     CPUData getData();
 
     /**
-     * returns the an ArrayList of integers representing a current
-     * snapshot of the memory
+     * resets all the CPU registers and memory to zero
      */
-     ArrayList<Integer> getMemory();
+    void resetCPUData();
+
 }
