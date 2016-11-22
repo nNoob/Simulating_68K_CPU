@@ -31,6 +31,7 @@ public class CPU {
     private static int[] memory = new int[256]; // the memory
     private static int run = 1;
 
+
     /*
      * Instruction format :
      * 7 6 5 4 3 2 1 0
