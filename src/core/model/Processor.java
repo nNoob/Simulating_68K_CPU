@@ -1,6 +1,6 @@
-package Core.Model;
+package core.model;
 
-/**
+/*
  * Created by abdelrahman on 11/22/16.
  */
 public interface Processor {
