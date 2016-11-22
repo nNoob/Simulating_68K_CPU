@@ -1,9 +1,11 @@
 package core.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ahmed on 11/22/2016.
  */
-public class CPU {
+public class CPU implements Processor{
 
     /*
      * Instruction format :
@@ -162,4 +164,40 @@ public class CPU {
             }
         }
     }
+
+    public void loadProgram(int[] code, int startingAddress) {
+        int codeLength = code.length;
+
+        if(codeLength + startingAddress > 255) {
+            throw new ArrayIndexOutOfBoundsException("No enough memory space for code");
+        }
+
+        for(int i = 0; i < codeLength; i++) {
+            data.memory[i+startingAddress] = code[i];
+        }
+    }
+
+    public String fetch() {
+        if(!isRunning)
+            return null;
+
+        fetchInstruction();
+        String fetchedInst = Integer.toBinaryString(inst.opcode) + Integer.toBinaryString(inst.operand);
+        return fetchedInst;
+    }
+
+    public void execute() {
+        executeInstruction(inst);
+
+    }
+
+    public CPUData getData() {
+        // return a copy of the original CPU data
+        return new CPUData(data);
+    }
+
+    public void resetCPUData() {
+        data.resetData();
+    }
+
 }
