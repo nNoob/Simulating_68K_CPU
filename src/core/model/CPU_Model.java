@@ -5,6 +5,7 @@ package core.model;
  */
 public class CPU_Model {
 
+
     private static final int MOVE = 0;
     private static final int ADD = 1;
     private static final int SUB = 2;
