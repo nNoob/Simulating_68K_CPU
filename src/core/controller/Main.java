@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         setUIFlavour();
-        JFrame frame = new JFrame("MainFrame");
+        JFrame frame = new JFrame("68K Simulator");
         frame.setContentPane(getMainPanel());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();

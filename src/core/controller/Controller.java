@@ -1,6 +1,7 @@
 package core.controller;
 
-import core.model.CPU_Model;
+import core.model.CPU;
+import gui.Listener;
 import gui.MainFrame;
 
 /*
@@ -9,7 +10,7 @@ import gui.MainFrame;
 
 public class Controller {
 
-    public Controller(MainFrame mainFrame, CPU_Model cpuModel) {
+    public Controller(MainFrame mainFrame, CPU cpuModel, Listener listener) {
 
     }
 

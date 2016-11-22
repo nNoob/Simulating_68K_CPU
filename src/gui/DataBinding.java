@@ -5,12 +5,15 @@ public class DataBinding {
     private String mar;
     private String d0;
     private String a0;
-    private String addressingMode;
+    private String aMode;
     private String opCode;
     private String mbr;
     private String ccr;
     private String source;
     private String operand;
+    private String instructionAddress;
+    private String editAddress;
+    private String editValue;
 
     public DataBinding() {
     }
@@ -47,12 +50,12 @@ public class DataBinding {
         this.a0 = a0;
     }
 
-    public String getAddressingMode() {
-        return addressingMode;
+    public String getaMode() {
+        return aMode;
     }
 
-    public void setAddressingMode(final String addressingMode) {
-        this.addressingMode = addressingMode;
+    public void setaMode(final String aMode) {
+        this.aMode = aMode;
     }
 
     public String getOpCode() {
@@ -93,5 +96,29 @@ public class DataBinding {
 
     public void setOperand(final String operand) {
         this.operand = operand;
+    }
+
+    public String getInstructionAddress() {
+        return instructionAddress;
+    }
+
+    public void setInstructionAddress(final String instructionAddress) {
+        this.instructionAddress = instructionAddress;
+    }
+
+    public String getEditAddress() {
+        return editAddress;
+    }
+
+    public void setEditAddress(final String editAddress) {
+        this.editAddress = editAddress;
+    }
+
+    public String getEditValue() {
+        return editValue;
+    }
+
+    public void setEditValue(final String editValue) {
+        this.editValue = editValue;
     }
 }
