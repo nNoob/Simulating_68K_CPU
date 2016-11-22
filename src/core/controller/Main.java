@@ -1,13 +1,14 @@
-package Core.Controller;
+package core.controller;
 
 import javax.swing.*;
 
-import static GUI.mainFrame.getMainPanel;
+import static gui.MainFrame.getMainPanel;
 
-/**
+/*
  * Created by Ahmed on 11/22/2016.
  */
 public class Main {
+
     private static void setUIFlavour() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -18,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         setUIFlavour();
-        JFrame frame = new JFrame("mainFrame");
+        JFrame frame = new JFrame("MainFrame");
         frame.setContentPane(getMainPanel());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
