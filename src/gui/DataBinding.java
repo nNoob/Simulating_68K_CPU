@@ -14,6 +14,62 @@ public class DataBinding {
     private String instructionAddress;
     private String editAddress;
     private String editValue;
+    private String newInstOpCode;
+    private String newInstAMode;
+    private String newInstOperand;
+    private String newInstSource;
+    private String newInstDirection;
+
+
+    public String getNewInstOpCode() {
+        return newInstOpCode;
+    }
+
+    public void setNewInstOpCode(String newInstOpCode) {
+        this.newInstOpCode = newInstOpCode;
+    }
+
+    public String getNewInstAMode() {
+        return newInstAMode;
+    }
+
+    public void setNewInstAMode(String newInstAMode) {
+        this.newInstAMode = newInstAMode;
+    }
+
+    public String getNewInstOperand() {
+        return newInstOperand;
+    }
+
+    public void setNewInstOperand(String newInstOperand) {
+        this.newInstOperand = newInstOperand;
+    }
+
+    public String getNewInstSource() {
+        return newInstSource;
+    }
+
+    public void setNewInstSource(String newInstSource) {
+        this.newInstSource = newInstSource;
+    }
+
+    public String getNewInstDirection() {
+        return newInstDirection;
+    }
+
+    public void setNewInstDirection(String newInstDirection) {
+        this.newInstDirection = newInstDirection;
+    }
+
+    public String getNewInstMemoryAddress() {
+        return newInstMemoryAddress;
+    }
+
+    public void setNewInstMemoryAddress(String newInstMemoryAddress) {
+        this.newInstMemoryAddress = newInstMemoryAddress;
+    }
+
+    private String newInstMemoryAddress;
 
     public DataBinding() {
     }

@@ -30,11 +30,23 @@ public class MainFrame extends JFrame {
     private JTextField editAddressTextField;
     private JTextField editValueTextField;
     private FrameListener frameListener;
+    DataBinding dataBinding;
 
-    public void registerAsListener(FrameListener fl){
+    public void registerAsListener(FrameListener fl) {
         this.frameListener = fl;
     }
 
+    int makeButtonnAction(DataBinding data) {
+        int instruction = 0;
+        int opCode = Integer.getInteger(data.getNewInstAMode());
+        int aMode = Integer.getInteger(data.getNewInstAMode());
+        int direction = Integer.getInteger(data.getNewInstDirection());
+
+        instruction |= (opCode << 4);
+        instruction |= aMode;
+        instruction |= (direction << 2);
+        return instruction;
+    }
 
     public MainFrame() {
         super();
@@ -44,11 +56,14 @@ public class MainFrame extends JFrame {
 
 
         makeButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
+                int[] ar = new int[1];
+                ar[0] = makeButtonnAction(dataBinding);
                 // TODO: transform the instruction builded into an integer
                 // TODO: and pass it to the method below
-                frameListener.loadProgramRequested();
+                frameListener.loadProgramRequested(ar, Integer.parseInt(instructionAddressTextField.getText()));
             }
         });
 
@@ -56,7 +71,9 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: pass the function below the proper arguements
-                frameListener.loadProgramRequested();
+                int ar[] = new int[1];
+                ar[0] = Integer.parseInt(editValueTextField.getText());
+                frameListener.loadProgramRequested(ar, Integer.parseInt(editAddressTextField.getText()));
             }
         });
         executeNextButton.addActionListener(new ActionListener() {
@@ -78,33 +95,26 @@ public class MainFrame extends JFrame {
     }
 
     public void setData(DataBinding data) {
+        dataBinding = data;
         PCtextField.setText(data.getPC());
         MARtextField.setText(data.getMAR());
         aModeTextField.setText(data.getaMode());
         opCodeTextField.setText(data.getOpCode());
         MBRtextField.setText(data.getMBR());
         CCRtextField.setText(data.getCCR());
-        sourceTextField.setText(data.getSource());
-        operandTextField.setText(data.getOperand());
-        instructionAddressTextField.setText(data.getInstructionAddress());
-        editAddressTextField.setText(data.getEditAddress());
-        editValueTextField.setText(data.getEditValue());
     }
 
     public void getData(DataBinding data) {
-        data.setPC(PCtextField.getText());
-        data.setMAR(MARtextField.getText());
-        data.setaMode(aModeTextField.getText());
-        data.setOpCode(opCodeTextField.getText());
-        data.setMBR(MBRtextField.getText());
-        data.setCCR(CCRtextField.getText());
+        //new instruction
+        data.setNewInstOpCode((String) operationComboBox.getSelectedItem());
+        data.setNewInstDirection((String) directionComboBox.getSelectedItem());
+        data.setNewInstAMode((String) aModeComboBox.getSelectedItem());
         data.setSource(sourceTextField.getText());
         data.setOperand(operandTextField.getText());
         data.setInstructionAddress(instructionAddressTextField.getText());
         data.setEditAddress(editAddressTextField.getText());
         data.setEditValue(editValueTextField.getText());
     }
-
 
 
     public boolean isModified(DataBinding data) {

@@ -251,10 +251,10 @@
                     </constraints>
                     <properties>
                       <model>
-                        <item value="Absolute"/>
-                        <item value="Literal"/>
-                        <item value="Indexed"/>
-                        <item value="Relative"/>
+                        <item value="00"/>
+                        <item value="01"/>
+                        <item value="10"/>
+                        <item value="11"/>
                       </model>
                     </properties>
                   </component>
@@ -291,8 +291,8 @@
                     </constraints>
                     <properties>
                       <model>
-                        <item value="Write to D0"/>
-                        <item value="Write to Memory"/>
+                        <item value="0"/>
+                        <item value="1"/>
                       </model>
                     </properties>
                   </component>
@@ -392,7 +392,9 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <text value=""/>
+                    </properties>
                   </component>
                   <component id="597e9" class="javax.swing.JTextField" binding="editValueTextField">
                     <constraints>

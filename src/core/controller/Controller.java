@@ -4,10 +4,8 @@ import core.model.CPU;
 import core.model.CPUData;
 import gui.DataBinding;
 import gui.FrameListener;
-import gui.Listener;
 import gui.MainFrame;
 
-import javax.xml.crypto.Data;
 
 /*
  * Created by Ahmed on 11/22/2016.
