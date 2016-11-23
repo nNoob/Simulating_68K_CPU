@@ -1,11 +1,13 @@
 package gui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /*
  * Created by Ahmed on 10/26/2016.
  */
-public class MainFrame {
+public class MainFrame extends JFrame {
     private JPanel mainPanel;
     private JTable memoryTable;
     private JTextField PCtextField;
@@ -27,20 +29,42 @@ public class MainFrame {
     private JButton writeButton;
     private JTextField editAddressTextField;
     private JTextField editValueTextField;
+    private FrameListener frameListener;
+
+    public void registerAsListener(FrameListener fl){
+        this.frameListener = fl;
+    }
 
 
-    public MainFrame(Listener listener) {
+    public MainFrame() {
+        super();
         makeButton.setName("make");
         writeButton.setName("write");
         executeNextButton.setName("execute");
-        //
-        makeButton.addActionListener(listener);
-        writeButton.addActionListener(listener);
-        executeNextButton.addActionListener(listener);
-    }
 
-    private MainFrame() {
 
+        makeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: transform the instruction builded into an integer
+                // TODO: and pass it to the method below
+                frameListener.loadProgramRequested();
+            }
+        });
+
+        writeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: pass the function below the proper arguements
+                frameListener.loadProgramRequested();
+            }
+        });
+        executeNextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameListener.nextStepRequested();
+            }
+        });
     }
 
     private static MainFrame frame = new MainFrame();
@@ -80,6 +104,8 @@ public class MainFrame {
         data.setEditAddress(editAddressTextField.getText());
         data.setEditValue(editValueTextField.getText());
     }
+
+
 
     public boolean isModified(DataBinding data) {
         if (PCtextField.getText() != null ? !PCtextField.getText().equals(data.getPC()) : data.getPC() != null)

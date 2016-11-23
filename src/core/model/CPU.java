@@ -5,8 +5,9 @@ import java.util.ArrayList;
 /**
  * Created by Ahmed on 11/22/2016.
  */
-public class CPU implements Processor{
+public class CPU implements Processor {
 
+    public enum State{FETCHED, EXECUTED, STOPPED, JUST_STARTED};
     /*
      * Instruction format :
      * 7 6 5 4 3 2 1 0
@@ -25,14 +26,14 @@ public class CPU implements Processor{
     private CPUData data;
     private int source;
     private int destination;
-    private boolean isRunning;
+    private State cpuState;
 
     public CPU() {
         inst = new Instruction();
         data = new CPUData();
         source = 0;
         destination = 0;
-        isRunning = true;
+        cpuState = State.JUST_STARTED;
     }
 
     private void fetchInstruction() {
@@ -141,7 +142,7 @@ public class CPU implements Processor{
                 data.D0 = data.A0;
                 data.A0 = data.MBR;
         } else if(oc == OpCodes.STOP.getValue()) {
-                isRunning = false;
+                cpuState = State.STOPPED;
         }
 
     }
@@ -178,17 +179,19 @@ public class CPU implements Processor{
     }
 
     public String fetch() {
-        if(!isRunning)
+        if(cpuState == State.STOPPED)
             return null;
 
         fetchInstruction();
         String fetchedInst = Integer.toBinaryString(inst.opcode) + Integer.toBinaryString(inst.operand);
+
+        cpuState = State.FETCHED;
         return fetchedInst;
     }
 
     public void execute() {
         executeInstruction(inst);
-
+        cpuState = State.EXECUTED;
     }
 
     public CPUData getData() {
@@ -198,6 +201,10 @@ public class CPU implements Processor{
 
     public void resetCPUData() {
         data.resetData();
+    }
+
+    public State getState() {
+        return this.cpuState;
     }
 
 }

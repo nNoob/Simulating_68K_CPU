@@ -1,5 +1,8 @@
 package core.controller;
 
+import core.model.CPU;
+import gui.MainFrame;
+
 import javax.swing.*;
 
 import static gui.MainFrame.getMainPanel;
@@ -19,10 +22,16 @@ public class Main {
 
     public static void main(String[] args) {
         setUIFlavour();
-        JFrame frame = new JFrame("68K Simulator");
+        MainFrame frame = new MainFrame();
         frame.setContentPane(getMainPanel());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        CPU cpu = new CPU();
+
+        Controller appController = new Controller(frame, cpu);
+        frame.registerAsListener(appController);
+
     }
 }
