@@ -1,14 +1,86 @@
 package gui;
 
+import javax.swing.table.DefaultTableModel;
+
 public class DataBinding {
-    private String pc;
-    private String mar;
-    private String d0;
-    private String a0;
+    // Monitor
+    private String PC;
+    private String MAR;
+    private String D0;
+    private String A0;
     private String aMode;
     private String opCode;
-    private String mbr;
-    private String ccr;
+    private String MBR;
+    private String CCR;
+
+    public String getPC() {
+        return PC;
+    }
+
+    public void setPC(String pc) {
+        this.PC = pc;
+    }
+
+    public String getMAR() {
+        return MAR;
+    }
+
+    public void setMAR(String MAR) {
+        this.MAR = MAR;
+    }
+
+    public String getD0() {
+        return D0;
+    }
+
+    public void setD0(String d0) {
+        this.D0 = d0;
+    }
+
+    public String getA0() {
+        return A0;
+    }
+
+    public void setA0(String a0) {
+        this.A0 = a0;
+    }
+
+    public String getaMode() {
+        return aMode;
+    }
+
+    public void setaMode(String aMode) {
+        this.aMode = aMode;
+    }
+
+    public String getOpCode() {
+        return opCode;
+    }
+
+    public void setOpCode(String opCode) {
+        this.opCode = opCode;
+    }
+
+    public String getMBR() {
+        return MBR;
+    }
+
+    public void setMBR(String MBR) {
+        this.MBR = MBR;
+    }
+
+    public String getCCR() {
+        return CCR;
+    }
+
+    public void setCCR(String CCR) {
+        this.CCR = CCR;
+    }
+
+
+    // Manage Memory Panel
+
+
     private String source;
     private String operand;
     private String instructionAddress;
@@ -19,7 +91,47 @@ public class DataBinding {
     private String newInstOperand;
     private String newInstSource;
     private String newInstDirection;
+    private DefaultTableModel memoryTableModel;
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getOperand() {
+        return operand;
+    }
+
+    public void setOperand(String operand) {
+        this.operand = operand;
+    }
+
+    public String getInstructionAddress() {
+        return instructionAddress;
+    }
+
+    public void setInstructionAddress(String instructionAddress) {
+        this.instructionAddress = instructionAddress;
+    }
+
+    public String getEditAddress() {
+        return editAddress;
+    }
+
+    public void setEditAddress(String editAddress) {
+        this.editAddress = editAddress;
+    }
+
+    public String getEditValue() {
+        return editValue;
+    }
+
+    public void setEditValue(String editValue) {
+        this.editValue = editValue;
+    }
 
     public String getNewInstOpCode() {
         return newInstOpCode;
@@ -61,120 +173,11 @@ public class DataBinding {
         this.newInstDirection = newInstDirection;
     }
 
-    public String getNewInstMemoryAddress() {
-        return newInstMemoryAddress;
+    public DefaultTableModel getMemoryTableModel() {
+        return memoryTableModel;
     }
 
-    public void setNewInstMemoryAddress(String newInstMemoryAddress) {
-        this.newInstMemoryAddress = newInstMemoryAddress;
-    }
-
-    private String newInstMemoryAddress;
-
-    public DataBinding() {
-    }
-
-    public String getPC() {
-        return pc;
-    }
-
-    public void setPC(final String pc) {
-        this.pc = pc;
-    }
-
-    public String getMAR() {
-        return mar;
-    }
-
-    public void setMAR(final String mar) {
-        this.mar = mar;
-    }
-
-    public String getD0() {
-        return d0;
-    }
-
-    public void setD0(final String d0) {
-        this.d0 = d0;
-    }
-
-    public String getA0() {
-        return a0;
-    }
-
-    public void setA0(final String a0) {
-        this.a0 = a0;
-    }
-
-    public String getaMode() {
-        return aMode;
-    }
-
-    public void setaMode(final String aMode) {
-        this.aMode = aMode;
-    }
-
-    public String getOpCode() {
-        return opCode;
-    }
-
-    public void setOpCode(final String opCode) {
-        this.opCode = opCode;
-    }
-
-    public String getMBR() {
-        return mbr;
-    }
-
-    public void setMBR(final String mbr) {
-        this.mbr = mbr;
-    }
-
-    public String getCCR() {
-        return ccr;
-    }
-
-    public void setCCR(final String ccr) {
-        this.ccr = ccr;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(final String source) {
-        this.source = source;
-    }
-
-    public String getOperand() {
-        return operand;
-    }
-
-    public void setOperand(final String operand) {
-        this.operand = operand;
-    }
-
-    public String getInstructionAddress() {
-        return instructionAddress;
-    }
-
-    public void setInstructionAddress(final String instructionAddress) {
-        this.instructionAddress = instructionAddress;
-    }
-
-    public String getEditAddress() {
-        return editAddress;
-    }
-
-    public void setEditAddress(final String editAddress) {
-        this.editAddress = editAddress;
-    }
-
-    public String getEditValue() {
-        return editValue;
-    }
-
-    public void setEditValue(final String editValue) {
-        this.editValue = editValue;
+    public void setMemoryTableModel(DefaultTableModel memoryTableModel) {
+        this.memoryTableModel = memoryTableModel;
     }
 }

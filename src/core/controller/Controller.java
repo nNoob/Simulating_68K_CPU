@@ -15,34 +15,34 @@ public class Controller implements FrameListener {
 
     private CPU cpu;
     private MainFrame mainFrame;
-    private DataBinding instance;
+    private DataBinding dataBinding;
 
     public Controller(MainFrame mainFrame, CPU cpu) {
         this.cpu = cpu;
         this.mainFrame = mainFrame;
-        instance = new DataBinding();
+        dataBinding = new DataBinding();
     }
 
     @Override
     public void nextStepRequested() {
-        if(cpu.getState() == CPU.State.STOPPED)
+        if (cpu.getState() == CPU.State.STOPPED)
             return;
-        else if(cpu.getState() == CPU.State.EXECUTED)
+        else if (cpu.getState() == CPU.State.EXECUTED)
             cpu.fetch();
-        else if(cpu.getState() == CPU.State.FETCHED)
+        else if (cpu.getState() == CPU.State.FETCHED)
             cpu.execute();
 
-        fillBindingData(cpu.getData(), instance);
+        fillBindingData(cpu.getData(), dataBinding);
 
-        mainFrame.setData(instance);
+        mainFrame.setData(dataBinding);
     }
 
     @Override
     public void loadProgramRequested(int[] code, int startingAddress) {
         cpu.loadProgram(code, startingAddress);
 
-        fillBindingData(cpu.getData(), instance);
-        mainFrame.setData(instance);
+        fillBindingData(cpu.getData(), dataBinding);
+        mainFrame.setData(dataBinding);
     }
 
     private void fillBindingData(CPUData cpuData, DataBinding currentInstance) {

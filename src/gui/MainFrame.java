@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /*
  * Created by Ahmed on 10/26/2016.
@@ -22,9 +20,9 @@ public class MainFrame extends JFrame {
     private JComboBox aModeComboBox;
     private JComboBox directionComboBox;
     private JButton makeButton;
-    private JTextField sourceTextField;
-    private JTextField operandTextField;
-    private JTextField instructionAddressTextField;
+    private JTextField newSourceTextField;
+    private JTextField newOperandTextField;
+    private JTextField newInstructionAddressTextField;
     private JButton executeNextButton;
     private JButton writeButton;
     private JTextField editAddressTextField;
@@ -36,18 +34,6 @@ public class MainFrame extends JFrame {
         this.frameListener = fl;
     }
 
-    int makeButtonnAction(DataBinding data) {
-        int instruction = 0;
-        int opCode = Integer.getInteger(data.getNewInstAMode());
-        int aMode = Integer.getInteger(data.getNewInstAMode());
-        int direction = Integer.getInteger(data.getNewInstDirection());
-
-        instruction |= (opCode << 4);
-        instruction |= aMode;
-        instruction |= (direction << 2);
-        return instruction;
-    }
-
     public MainFrame() {
         super();
         makeButton.setName("make");
@@ -55,33 +41,23 @@ public class MainFrame extends JFrame {
         executeNextButton.setName("execute");
 
 
-        makeButton.addActionListener(new ActionListener() {
+        makeButton.addActionListener(e -> {
+            int[] ar = new int[1];
+            // TODO: transform the instruction builded into an integer
+            // TODO: and pass it to the method below
+            //
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int[] ar = new int[1];
-                ar[0] = makeButtonnAction(dataBinding);
-                // TODO: transform the instruction builded into an integer
-                // TODO: and pass it to the method below
-                frameListener.loadProgramRequested(ar, Integer.parseInt(instructionAddressTextField.getText()));
-            }
+            //
+            frameListener.loadProgramRequested(ar, Integer.parseInt(newInstructionAddressTextField.getText()));
         });
 
-        writeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: pass the function below the proper arguements
-                int ar[] = new int[1];
-                ar[0] = Integer.parseInt(editValueTextField.getText());
-                frameListener.loadProgramRequested(ar, Integer.parseInt(editAddressTextField.getText()));
-            }
+        writeButton.addActionListener(e -> {
+            // TODO: pass the function below the proper arguements
+            int ar[] = new int[1];
+            ar[0] = Integer.parseInt(editValueTextField.getText());
+            frameListener.loadProgramRequested(ar, Integer.parseInt(editAddressTextField.getText()));
         });
-        executeNextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frameListener.nextStepRequested();
-            }
-        });
+        executeNextButton.addActionListener(e -> frameListener.nextStepRequested());
     }
 
     private static MainFrame frame = new MainFrame();
@@ -94,6 +70,7 @@ public class MainFrame extends JFrame {
         return frame.mainPanel;
     }
 
+
     public void setData(DataBinding data) {
         dataBinding = data;
         PCtextField.setText(data.getPC());
@@ -105,13 +82,13 @@ public class MainFrame extends JFrame {
     }
 
     public void getData(DataBinding data) {
-        //new instruction
+        // Manage memory panel
         data.setNewInstOpCode((String) operationComboBox.getSelectedItem());
         data.setNewInstDirection((String) directionComboBox.getSelectedItem());
         data.setNewInstAMode((String) aModeComboBox.getSelectedItem());
-        data.setSource(sourceTextField.getText());
-        data.setOperand(operandTextField.getText());
-        data.setInstructionAddress(instructionAddressTextField.getText());
+        data.setSource(newSourceTextField.getText());
+        data.setOperand(newOperandTextField.getText());
+        data.setInstructionAddress(newInstructionAddressTextField.getText());
         data.setEditAddress(editAddressTextField.getText());
         data.setEditValue(editValueTextField.getText());
     }
@@ -130,11 +107,11 @@ public class MainFrame extends JFrame {
             return true;
         if (CCRtextField.getText() != null ? !CCRtextField.getText().equals(data.getCCR()) : data.getCCR() != null)
             return true;
-        if (sourceTextField.getText() != null ? !sourceTextField.getText().equals(data.getSource()) : data.getSource() != null)
+        if (newSourceTextField.getText() != null ? !newSourceTextField.getText().equals(data.getSource()) : data.getSource() != null)
             return true;
-        if (operandTextField.getText() != null ? !operandTextField.getText().equals(data.getOperand()) : data.getOperand() != null)
+        if (newOperandTextField.getText() != null ? !newOperandTextField.getText().equals(data.getOperand()) : data.getOperand() != null)
             return true;
-        if (instructionAddressTextField.getText() != null ? !instructionAddressTextField.getText().equals(data.getInstructionAddress()) : data.getInstructionAddress() != null)
+        if (newInstructionAddressTextField.getText() != null ? !newInstructionAddressTextField.getText().equals(data.getInstructionAddress()) : data.getInstructionAddress() != null)
             return true;
         if (editAddressTextField.getText() != null ? !editAddressTextField.getText().equals(data.getEditAddress()) : data.getEditAddress() != null)
             return true;
